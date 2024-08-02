@@ -12,11 +12,15 @@
       "require": "./dist/ESIApi.umd.js"
     }
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint . --fix && prettier --write ."
+    "lint": "eslint . --fix && prettier --write .",
+    "publish": "pnpm publish"
   },
   "peerDependencies": {
     "axios": "^1.7.2"
