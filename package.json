@@ -1,6 +1,6 @@
 {
   "name": "@scvzerng/esi-163",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "晨曦ESI接口",
   "author": "scvzerng",
   "main": "dist/ESIApi.es.js",
