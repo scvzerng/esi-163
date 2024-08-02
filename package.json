@@ -4,6 +4,14 @@
   "private": true,
   "description": "晨曦ESI接口",
   "author": "scvzerng",
+  "main": "dist/ESIApi.es.js",
+  "types": "./dist/types/esi/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/ESIApi.es.js",
+      "require": "./dist/ESIApi.umd.js"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

@@ -1,6 +1,6 @@
 import { HttpClient } from "../client";
-import { AlliancesApi } from "./alliances/AlliancesApi.ts";
-import { UniverseApi } from "./universe/UniverseApi.ts";
+import { AlliancesApi } from "./alliances";
+import { UniverseApi } from "./universe";
 import { MarketApi } from "./markets";
 import { IndustryApi } from "./industry";
 import { CorporationApi } from "./corporations";

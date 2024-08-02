@@ -1,4 +1,4 @@
-import { timeoutSystems } from "./model/TimeoutSystems.ts";
+import { timeoutSystems } from "./model/TimeoutSystems";
 import type {
   UniverseCategory,
   UniverseConstellation,
