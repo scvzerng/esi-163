@@ -112,7 +112,22 @@ export class UniverseApi {
    * 获取所有分组ID
    */
   async groups() {
-    return this.client.get<number[]>(`/universe/groups`);
+    const allGroupIds: number[] = [];
+    for (let page = 1; page <= 100; page++) {
+      const groups = await this.client.get<number[]>("/universe/groups", {
+        page,
+      });
+      if (!groups) {
+        break;
+      }
+      if (groups) {
+        allGroupIds.push(...groups);
+        if (groups.length < 1000) {
+          break;
+        }
+      }
+    }
+    return allGroupIds;
   }
 
   /**
