@@ -19,7 +19,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint . --fix && prettier --write .",
-    "publish": "pnpm publish"
+    "publish": "pnpm publish --access public"
   },
   "peerDependencies": {
     "axios": "^1.7.2"
