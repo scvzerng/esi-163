@@ -1,6 +1,6 @@
 {
-  "name": "esi-163",
-  "version": "0.0.0",
+  "name": "@scvzerng/esi-163",
+  "version": "0.0.1",
   "private": true,
   "description": "晨曦ESI接口",
   "author": "scvzerng",
