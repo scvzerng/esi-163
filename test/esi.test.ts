@@ -324,7 +324,7 @@ describe("esi", () => {
           for (const item of items!) {
             const type = await universe.type(item.type_id);
             //@ts-ignore
-            type.price = maxBuyOrders.get(item.type_id)?.price;
+            type.price = maxBuyOrders.get(item.type_id)?.price ?? 0;
             //@ts-ignore
             item.amount = type.price * item.quantity;
             //@ts-ignore
