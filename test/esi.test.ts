@@ -4,7 +4,7 @@ import { createEsiSdk } from "../src/esi";
 import { Units } from "../src/esi/dogma/model";
 import { accessToken, playerId, refreshToken } from "./esi.test.env";
 import type { MarketOrder } from "../src/esi/markets/model/MarketOrder";
-import type { Token } from "../src/esi/auth/model";
+import type { Token } from "../src/esi/auth";
 const longTime = {
   timeout: 60 * 1000 * 60,
 };

@@ -8,7 +8,7 @@ import { CharactersApi } from "./characters";
 import { DogmaApi } from "./dogma";
 import { AuthApi } from "./auth";
 import { ContractApi } from "./contracts";
-
+export * from "./auth/model";
 export const createEsiSdk = (host: string) => {
   const client = new HttpClient(host);
   return {
