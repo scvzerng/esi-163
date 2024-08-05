@@ -138,6 +138,7 @@ module.exports = defineConfig({
     },
   ],
   rules: {
+    "eol-last": ["error", "always"],
     // js/ts
     camelcase: ["error", { properties: "never" }],
     "no-console": ["warn", { allow: ["error", "warn", "debug"] }],
