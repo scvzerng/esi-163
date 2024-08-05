@@ -6,6 +6,7 @@ import { IndustryApi } from "./industry";
 import { CorporationApi } from "./corporations";
 import { CharactersApi } from "./characters";
 import { DogmaApi } from "./dogma";
+import { AuthApi } from "./auth";
 
 export const createEsiSdk = (host: string) => {
   const client = new HttpClient(host);
@@ -17,5 +18,6 @@ export const createEsiSdk = (host: string) => {
     corporation: new CorporationApi(client),
     character: new CharactersApi(client),
     dogma: new DogmaApi(client),
+    auth: new AuthApi(client),
   };
 };

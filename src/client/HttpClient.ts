@@ -9,8 +9,13 @@ export class HttpClient {
     this.host = host;
   }
 
-  async post<RS>(url: string, data?: never, params?: never, headers?: never) {
-    return this.request<never, RS>({
+  async post<RS>(
+    url: string,
+    data?: Record<string, any | undefined>,
+    params?: Record<string, any | undefined>,
+    headers?: Record<string, any | undefined>
+  ) {
+    return this.request<Record<string, any | undefined>, RS>({
       method: "POST",
       url,
       params,
@@ -37,7 +42,9 @@ export class HttpClient {
       const appendHeaders: Record<string, string | undefined> = {};
 
       const response = await axios.request<T, AxiosResponse<R>>({
-        url: `${this.host}${config.url}`,
+        url: config.url?.startsWith("http")
+          ? config.url
+          : `${this.host}${config.url}`,
         method: config.method,
         params: { ...(config.params ?? {}), language: "zh" },
         data: config.data,

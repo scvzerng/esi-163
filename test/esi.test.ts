@@ -1,7 +1,7 @@
 import console from "node:console";
 import { assert, describe, expect, test } from "vitest";
-import { createEsiSdk } from "./esi";
-import { Units } from "./esi/dogma/model";
+import { createEsiSdk } from "../src/esi";
+import { Units } from "../src/esi/dogma/model";
 
 const longTime = {
   timeout: 60 * 1000 * 60,
@@ -16,6 +16,7 @@ describe("esi", () => {
     corporation,
     character,
     dogma,
+    auth,
   } = createEsiSdk("https://ali-esi.evepc.163.com/latest");
 
   const getFirstAlliance = async () => {
@@ -262,4 +263,25 @@ describe("esi", () => {
     },
     longTime
   );
+
+  describe("授权", () => {
+    // const code = "your esi code";
+    test(
+      "获取授权页面",
+      async () => {
+        const url = auth.authUrl(["esi-alliances.read_contacts.v1"]);
+        assert(url !== null);
+      },
+      longTime
+    );
+    // const accessToken =
+    //   "your access token";
+    const refreshToken = "your refresh token";
+    test("获取RefreshToken", async () => {
+      // const token = await auth.getRefreshToken(code);
+      const token = await auth.getTokenFromRefreshToken(refreshToken);
+      const info = auth.getTokenInfo(token!);
+      console.log(info);
+    });
+  });
 });
