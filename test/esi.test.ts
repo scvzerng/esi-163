@@ -2,7 +2,9 @@ import console from "node:console";
 import { assert, describe, expect, test } from "vitest";
 import { createEsiSdk } from "../src/esi";
 import { Units } from "../src/esi/dogma/model";
-
+import { accessToken, playerId, refreshToken } from "./esi.test.env";
+import type { MarketOrder } from "../src/esi/markets/model/MarketOrder";
+import type { Token } from "../src/esi/auth/model";
 const longTime = {
   timeout: 60 * 1000 * 60,
 };
@@ -17,6 +19,7 @@ describe("esi", () => {
     character,
     dogma,
     auth,
+    contracts,
   } = createEsiSdk("https://ali-esi.evepc.163.com/latest");
 
   const getFirstAlliance = async () => {
@@ -269,19 +272,84 @@ describe("esi", () => {
     test(
       "获取授权页面",
       async () => {
-        const url = auth.authUrl(["esi-alliances.read_contacts.v1"]);
+        const url = auth.authUrl(["esi-contracts.read_character_contracts.v1"]);
         assert(url !== null);
       },
       longTime
     );
-    // const accessToken =
-    //   "your access token";
-    const refreshToken = "your refresh token";
+
     test("获取RefreshToken", async () => {
-      // const token = await auth.getRefreshToken(code);
+      // const token = await auth.getTokenFromESICode("djUAop8l_Uu8lteRdLbjlQ");
       const token = await auth.getTokenFromRefreshToken(refreshToken);
       const info = auth.getTokenInfo(token!);
-      console.log(info);
+      console.log(accessToken, playerId, info);
     });
+  });
+
+  describe("合同", () => {
+    test(
+      "计算合同估价",
+      async () => {
+        // const orders = await markets.orders(10000002);
+        const prices = await markets.prices();
+        const maxBuyOrders = new Map<number, MarketOrder>();
+        // orders.forEach((order) => {
+        //   if (order.is_buy_order) {
+        //     const buy = maxBuyOrders.get(order.type_id);
+        //     if (!buy) {
+        //       maxBuyOrders.set(order.type_id, order);
+        //       return;
+        //     }
+        //     if (order.price > buy.price) {
+        //       maxBuyOrders.set(order.type_id, order);
+        //     }
+        //   }
+        // });
+        prices!.forEach((price) => {
+          maxBuyOrders.set(price.type_id, {
+            price: price.average_price,
+          } as MarketOrder);
+        });
+        const list = await contracts.personalContracts(
+          { access_token: accessToken } as Token,
+          playerId
+        );
+        const zeroContract = list!.filter((c) => c.price === 0);
+        for (const contract of zeroContract) {
+          const items = await contracts.contract(
+            { access_token: accessToken } as Token,
+            playerId,
+            contract.contract_id
+          );
+          for (const item of items!) {
+            const type = await universe.type(item.type_id);
+            //@ts-ignore
+            type.price = maxBuyOrders.get(item.type_id)?.price;
+            //@ts-ignore
+            item.amount = type.price * item.quantity;
+            //@ts-ignore
+            item.type = type;
+          }
+          //@ts-ignore
+          contract.items = items;
+          //@ts-ignore
+          contract.estimatedPrice = items
+            //@ts-ignore
+            .map((item) => item.amount)
+            .reduce((total, ele) => total + ele, 0);
+          console.log(
+            //@ts-ignore
+            `${contract.contract_id}(${contract.type}) ${contract.date_completed} - ${contract.estimatedPrice}ISK`
+          );
+          //@ts-ignore
+          contract.items.forEach((item) => {
+            console.log(
+              `\t${item.type.name}(${item.quantity})- ${item.amount}ISK`
+            );
+          });
+        }
+      },
+      longTime
+    );
   });
 });

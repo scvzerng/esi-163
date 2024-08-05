@@ -60,7 +60,7 @@ export class HttpClient {
         if (e.response?.status === 404) {
           return null;
         }
-        throw new ESIError(e.response?.status, e.code);
+        throw new ESIError(e.response?.data.error, e.code);
       }
     }
   }
