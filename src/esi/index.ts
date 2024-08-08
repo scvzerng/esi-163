@@ -8,6 +8,17 @@ import { CharactersApi } from "./characters";
 import { DogmaApi } from "./dogma";
 import { AuthApi } from "./auth";
 import { ContractApi } from "./contracts";
+
+export * from "./alliances/model";
+export * from "./universe/model";
+export * from "./markets/model";
+export * from "./industry/model";
+export * from "./corporations/model";
+export * from "./characters/model";
+export * from "./dogma/model";
+export * from "./auth/model";
+export * from "./contracts/model";
+
 export const createEsiSdk = (host: string) => {
   const client = new HttpClient(host);
   return {

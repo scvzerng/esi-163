@@ -1,5 +1,4 @@
-import type { DogmaEffect } from "./model/DogmaEffect.ts";
-import type { DogmaAttribute } from "./model";
+import type { DogmaAttribute, DogmaEffect } from "./model";
 import type { HttpClient } from "../../client";
 
 export class DogmaApi {

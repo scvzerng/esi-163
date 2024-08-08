@@ -1,5 +1,5 @@
 import type { MarketOrder, ProductPrice, ProductPriceHistory } from "./model";
-import type { UniverseGroup } from "../universe";
+import type { UniverseGroup } from "../universe/model";
 import type { HttpClient } from "../../client";
 
 export class MarketApi {
