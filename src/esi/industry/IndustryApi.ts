@@ -1,4 +1,4 @@
-import type { IndustryFacility } from "./IndustryFacility.ts";
+import type { IndustryFacility } from "./model";
 import type { HttpClient } from "../../client";
 
 export class IndustryApi {

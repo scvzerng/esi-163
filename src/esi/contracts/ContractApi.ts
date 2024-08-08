@@ -1,6 +1,6 @@
 import type { Contract, ContractItem } from "./model";
 import type { HttpClient } from "../../client";
-import type { Token } from "../auth/model";
+import type { Token } from "../auth";
 
 export class ContractApi {
   private client: HttpClient;

@@ -1,4 +1,4 @@
-import type { Corporation } from "./model/Corporation.ts";
+import type { Corporation } from "./model";
 import type { HttpClient } from "../../client";
 
 const errorIds = new Set([1000127]);

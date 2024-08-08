@@ -1,4 +1,4 @@
-import type { Alliance } from "./model/AllianceInfo.ts";
+import type { Alliance } from "./model";
 import type { HttpClient } from "../../client";
 
 export class AlliancesApi {

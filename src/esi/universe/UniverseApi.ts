@@ -1,4 +1,3 @@
-import { timeoutSystems } from "./model/TimeoutSystems";
 import type {
   UniverseCategory,
   UniverseConstellation,
@@ -44,15 +43,9 @@ export class UniverseApi {
    * @param id
    */
   async constellation(id: number) {
-    const constellation = await this.client.get<UniverseConstellation>(
+    return this.client.get<UniverseConstellation>(
       `/universe/constellations/${id}`
     );
-    if (constellation) {
-      constellation.systems = constellation.systems.filter(
-        (s) => !timeoutSystems.has(s)
-      );
-    }
-    return constellation;
   }
 
   /**

@@ -1,4 +1,5 @@
 export * from "./DogmaAttribute";
+export * from "./DogmaEffect";
 //TODO 少校准值的
 export const Units: Record<string, any> = {
   "1": {

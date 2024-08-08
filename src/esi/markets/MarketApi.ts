@@ -1,6 +1,5 @@
-import type { MarketOrder } from "./model/MarketOrder.ts";
-import type { UniverseGroup } from "../universe/model";
-import type { ProductPrice, ProductPriceHistory } from "./model";
+import type { MarketOrder, ProductPrice, ProductPriceHistory } from "./model";
+import type { UniverseGroup } from "../universe";
 import type { HttpClient } from "../../client";
 
 export class MarketApi {

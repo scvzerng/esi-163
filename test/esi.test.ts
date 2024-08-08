@@ -1,9 +1,9 @@
 import console from "node:console";
 import { assert, describe, expect, test } from "vitest";
 import { createEsiSdk } from "../src/esi";
-import { Units } from "../src/esi/dogma/model";
+import { Units } from "../src/esi/dogma";
 import { accessToken, playerId, refreshToken } from "./esi.test.env";
-import type { MarketOrder } from "../src/esi/markets/model/MarketOrder";
+import type { MarketOrder } from "../src/esi/markets";
 import type { Token } from "../src/esi/auth";
 const longTime = {
   timeout: 60 * 1000 * 60,
