@@ -312,8 +312,10 @@ describe("esi", () => {
         });
         const list = await contracts.personalContracts(
           { access_token: accessToken } as Token,
-          playerId
+          playerId,
+          2
         );
+        if (!list) return;
         const zeroContract = list!.filter((c) => c.price === 0);
         for (const contract of zeroContract) {
           const items = await contracts.contract(

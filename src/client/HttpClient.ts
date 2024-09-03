@@ -57,7 +57,10 @@ export class HttpClient {
       return response.data;
     } catch (e: unknown) {
       if (e instanceof AxiosError) {
-        if (e.response?.status === 404) {
+        if (
+          e.response?.status === 404 ||
+          e.response?.data.error?.includes("404")
+        ) {
           return null;
         }
         throw new ESIError(e.response?.data.error, e.code);

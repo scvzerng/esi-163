@@ -1,6 +1,6 @@
 {
   "name": "@scvzerng/esi-163",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "晨曦ESI接口",
   "author": "scvzerng",
   "files": [
@@ -18,8 +18,7 @@
     "dev": "vite",
     "build": "vite build & tsc",
     "preview": "vite preview",
-    "lint": "eslint . --fix && prettier --write .",
-    "publish": "pnpm publish --access public"
+    "lint": "eslint . --fix && prettier --write ."
   },
   "peerDependencies": {
     "axios": "^1.7.2"
