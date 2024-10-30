@@ -8,6 +8,7 @@ import { CharactersApi } from "./characters";
 import { DogmaApi } from "./dogma";
 import { AuthApi } from "./auth";
 import { ContractApi } from "./contracts";
+import { AssetsApi } from "./assets/AssetsApi";
 
 export * from "./alliances/model";
 export * from "./universe/model";
@@ -31,5 +32,6 @@ export const createEsiSdk = (host: string) => {
     dogma: new DogmaApi(client),
     auth: new AuthApi(client),
     contracts: new ContractApi(client),
+    assets: new AssetsApi(client),
   };
 };

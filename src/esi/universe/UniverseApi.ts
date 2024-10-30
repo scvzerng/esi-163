@@ -3,6 +3,7 @@ import type {
   UniverseConstellation,
   UniverseGroup,
   UniverseRegion,
+  UniverseStation,
   UniverseSystem,
   UniverseType,
 } from "./model";
@@ -129,5 +130,38 @@ export class UniverseApi {
    */
   async group(id: number) {
     return this.client.get<UniverseGroup>(`/universe/groups/${id}`);
+  }
+
+  /**
+   * 获取空间站信息
+   * @param id
+   */
+  async station(id: number) {
+    return this.client.get<UniverseStation>(`/universe/stations/${id}`);
+  }
+
+/**
+   * 根据指定类型获取结构 ID 列表。
+   *
+   * @param {（“市场” |“manufacturing basic”）} type - 要为其获取 ID 的结构类型。
+   * @return {Promise<number[]>} 解析为结构 ID 数组的 Promise。
+   */
+  async structures(type: "market" | "manufacturing basic") {
+    return this.client.get<number[]>(`/universe/structures`, {
+      filter: type,
+    });
+  }
+
+/**
+   * 获取给定结构 ID 的结构详细信息。
+   *
+   * @param {number} id - 要获取其详细信息的结构的 ID。
+   * @param {string} token - 用于 API 调用的身份验证令牌。
+   * @return {Promise<number[]>} 一个 Promise，它解析为表示结构细节的数字数组。
+   */
+  async structure(id: number, token: string) {
+    return this.client.get<number[]>(`/universe/structures/${id}`, {
+      token,
+    });
   }
 }

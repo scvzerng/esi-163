@@ -1,15 +1,44 @@
 import console from "node:console";
 import { assert, describe, expect, test } from "vitest";
-import { createEsiSdk } from "../src/esi";
-import { Units } from "../src/esi/dogma";
+import { Units, createEsiSdk } from "../src/esi";
 import { accessToken, playerId, refreshToken } from "./esi.test.env";
-import type { MarketOrder } from "../src/esi/markets";
-import type { Token } from "../src/esi/auth";
+import type { Asset } from "../src/esi/assets/model/Asset";
+import type { MarketOrder, Token } from "../src/esi";
 const longTime = {
   timeout: 60 * 1000 * 60,
 };
+const getLocationFlagString = (flag: string) => {
+  if (flag.startsWith("MedSlot")) {
+    return flag.replace("MedSlot", "中槽");
+  }
+  if (flag.startsWith("HiSlot")) {
+    return flag.replace("HiSlot", "高槽");
+  }
+  if (flag.startsWith("LoSlot")) {
+    return flag.replace("LoSlot", "低槽");
+  }
+  if (flag.startsWith("RigSlot")) {
+    return flag.replace("RigSlot", "改装槽");
+  }
+  if (flag === "DroneBay") {
+    return "无人机挂仓";
+  }
+  if (flag === "Hangar") {
+    return "机库";
+  }
 
-describe("esi", () => {
+  if (flag === "Cargo") {
+    return "货柜";
+  }
+  return flag;
+};
+const getLocationTypeString = (type: string) => {
+  if (type === "station") {
+    return "空间站";
+  }
+  return type;
+};
+describe("esi", async () => {
   const {
     alliances,
     universe,
@@ -19,8 +48,11 @@ describe("esi", () => {
     character,
     dogma,
     auth,
+    assets,
     contracts,
   } = createEsiSdk("https://ali-esi.evepc.163.com/latest");
+  const token = (await auth.getTokenFromRefreshToken(refreshToken))!
+    .access_token!;
 
   const getFirstAlliance = async () => {
     const result = await alliances.list();
@@ -284,6 +316,51 @@ describe("esi", () => {
       const info = auth.getTokenInfo(token!);
       console.log(accessToken, playerId, info);
     });
+  });
+
+  describe("个人资产", () => {
+    test(
+      "列表",
+      async () => {
+        const assetsList: Asset[] = [];
+        for (let i = 0; i < 100; i++) {
+          const page = await assets.list(playerId, i + 1, token);
+          if (!page || page.length === 0) {
+            break;
+          }
+          assetsList.push(...page);
+        }
+        const assetMap = assetsList!.reduce((map, asset) => {
+          map.set(asset.location_id, asset);
+          return map;
+        }, new Map<number, Asset>());
+        for (const asset of assetsList!) {
+          const parent = assetMap.get(asset.location_id);
+          if (parent) {
+            if (!parent.children) {
+              parent.children = [];
+            }
+            parent.children.push(asset);
+            asset.parent = parent;
+          }
+          asset.type = (await universe.type(asset.type_id))!;
+          const flag = getLocationFlagString(asset.location_flag);
+          if (asset.location_id >= 60000000 && asset.location_id <= 64000000) {
+            //@ts-ignore
+            asset.localtion = await universe.station(asset.location_id);
+          }
+
+          const type = getLocationTypeString(asset.location_type);
+          asset.location_flag = flag;
+          //@ts-ignore
+          asset.location_type = type;
+        }
+        //@ts-ignore
+        const typed = assetsList!.filter((asset) => !asset.parent);
+        console.log(typed);
+      },
+      longTime
+    );
   });
 
   describe("合同", () => {
