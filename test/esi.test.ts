@@ -1,4 +1,3 @@
-import console from "node:console";
 import { assert, describe, expect, test } from "vitest";
 import { Units, createEsiSdk } from "../src/esi";
 import { accessToken, playerId, refreshToken } from "./esi.test.env";
@@ -50,6 +49,7 @@ describe("esi", async () => {
     auth,
     assets,
     contracts,
+    plant,
   } = createEsiSdk("https://ali-esi.evepc.163.com/latest");
   const token = (await auth.getTokenFromRefreshToken(refreshToken))!
     .access_token!;
@@ -316,6 +316,21 @@ describe("esi", async () => {
       const info = auth.getTokenInfo(token!);
       console.log(accessToken, playerId, info);
     });
+  });
+
+  describe("行星开发", () => {
+    test(
+      "我的行星",
+      async () => {
+        const plants = await plant.list(playerId, token);
+        for (const _plant of plants) {
+          const layout = await plant.layout(playerId, _plant.planet_id, token);
+          console.log(layout);
+        }
+        console.log(plants);
+      },
+      longTime
+    );
   });
 
   describe("个人资产", () => {
