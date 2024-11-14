@@ -322,9 +322,16 @@ describe("esi", async () => {
     test(
       "我的行星",
       async () => {
-        const plants = await plant.list(playerId, token);
+        const plants = await plant.list(
+          playerId,
+          "eyJhbGciOiJSUzI1NiIsImtpZCI6IkpXVC1TaWduYXR1cmUtS2V5IiwidHlwIjoiSldUIn0.eyJzY3AiOlsiZXNpLWNvbnRyYWN0cy5yZWFkX2NoYXJhY3Rlcl9jb250cmFjdHMudjEiLCJlc2ktYXNzZXRzLnJlYWRfYXNzZXRzLnYxIiwiZXNpLXVuaXZlcnNlLnJlYWRfc3RydWN0dXJlcy52MSJdLCJqdGkiOiI0YWEyNTg0ZC01NGZhLTQ0ZWEtYTg4NC05MTZmM2NkZGQ2NGMiLCJraWQiOiJKV1QtU2lnbmF0dXJlLUtleSIsInN1YiI6IkNIQVJBQ1RFUjpFVkU6OTAyNjQyNjciLCJhenAiOiJiYzkwYWE0OTZhNDA0NzI0YTkzZjQxYjRmNGU5Nzc2MSIsInRlbmFudCI6InNlcmVuaXR5IiwidGllciI6ImxpdmUiLCJyZWdpb24iOiJjaGluYSIsIm5hbWUiOiLokKjlsJTmkanlsJQiLCJvd25lciI6Iit3WnJCZFk4SFVrUStZSzc1UStmYzBMb2VBbz0iLCJleHAiOjE3MzA0MjcxOTQsImlzcyI6ImxvZ2luLmV2ZXBjLjE2My5jb20ifQ.Yg5E2TKjwqskZnMUChH2VPZaeY4nf3C7WfaSSJf3tMiUGMxkDQYZpHvIyGoYSV6BE86M1AAbWZqjBRUImgdq3vXY0OL-jtLBUweFGZbwoF5zu88mNHcVwy6hre6nZt0ub_AiC9pp6Ueqbtw0ne3f3NmQs2Ri6aCCC72dXX2YncpGT9bhEbL33KGwKpJ-zA62yvu4owGt_Dwz0W3Pel_Cpne4YGtM4eqCWqaQwKNqLrUYYjOct0OQkcZ73W09ULqBCEKQw0sEYcjBDA_jH_YlzI82YjUpQ_YMb8aHQxLBgaig4HP64qCxVsm93woLnPiGHwMyNNDcWWgWLrNE18xSjg"
+        );
         for (const _plant of plants) {
-          const layout = await plant.layout(playerId, _plant.planet_id, token);
+          const layout = await plant.layout(
+            playerId,
+            _plant.planet_id,
+            "eyJhbGciOiJSUzI1NiIsImtpZCI6IkpXVC1TaWduYXR1cmUtS2V5IiwidHlwIjoiSldUIn0.eyJzY3AiOlsiZXNpLWNvbnRyYWN0cy5yZWFkX2NoYXJhY3Rlcl9jb250cmFjdHMudjEiLCJlc2ktYXNzZXRzLnJlYWRfYXNzZXRzLnYxIiwiZXNpLXVuaXZlcnNlLnJlYWRfc3RydWN0dXJlcy52MSJdLCJqdGkiOiI0YWEyNTg0ZC01NGZhLTQ0ZWEtYTg4NC05MTZmM2NkZGQ2NGMiLCJraWQiOiJKV1QtU2lnbmF0dXJlLUtleSIsInN1YiI6IkNIQVJBQ1RFUjpFVkU6OTAyNjQyNjciLCJhenAiOiJiYzkwYWE0OTZhNDA0NzI0YTkzZjQxYjRmNGU5Nzc2MSIsInRlbmFudCI6InNlcmVuaXR5IiwidGllciI6ImxpdmUiLCJyZWdpb24iOiJjaGluYSIsIm5hbWUiOiLokKjlsJTmkanlsJQiLCJvd25lciI6Iit3WnJCZFk4SFVrUStZSzc1UStmYzBMb2VBbz0iLCJleHAiOjE3MzA0MjcxOTQsImlzcyI6ImxvZ2luLmV2ZXBjLjE2My5jb20ifQ.Yg5E2TKjwqskZnMUChH2VPZaeY4nf3C7WfaSSJf3tMiUGMxkDQYZpHvIyGoYSV6BE86M1AAbWZqjBRUImgdq3vXY0OL-jtLBUweFGZbwoF5zu88mNHcVwy6hre6nZt0ub_AiC9pp6Ueqbtw0ne3f3NmQs2Ri6aCCC72dXX2YncpGT9bhEbL33KGwKpJ-zA62yvu4owGt_Dwz0W3Pel_Cpne4YGtM4eqCWqaQwKNqLrUYYjOct0OQkcZ73W09ULqBCEKQw0sEYcjBDA_jH_YlzI82YjUpQ_YMb8aHQxLBgaig4HP64qCxVsm93woLnPiGHwMyNNDcWWgWLrNE18xSjg"
+          );
           console.log(layout);
         }
         console.log(plants);

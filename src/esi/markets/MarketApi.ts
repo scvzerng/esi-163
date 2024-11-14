@@ -49,8 +49,23 @@ export class MarketApi {
    * 获取指定星域市场的商品ID
    * @param regionId
    */
-  types(regionId: number) {
-    return this.client.get<number[]>(`/markets/${regionId}/types`);
+  async types(regionId: number) {
+    const typeIds: number[] = [];
+    let page = 1;
+    while (true) {
+      const ids = await this.client.get<number[]>(
+        `/markets/${regionId}/types`,
+        {
+          page,
+        }
+      );
+      typeIds.push(...(ids ?? []));
+      if ((ids?.length ?? 0) < 1000) {
+        break;
+      }
+      page = page + 1;
+    }
+    return typeIds;
   }
 
   /**
