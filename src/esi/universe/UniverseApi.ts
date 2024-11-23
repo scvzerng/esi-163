@@ -2,6 +2,7 @@ import type {
   UniverseCategory,
   UniverseConstellation,
   UniverseGroup,
+  UniversePlanet,
   UniverseRegion,
   UniverseStation,
   UniverseSystem,
@@ -140,7 +141,7 @@ export class UniverseApi {
     return this.client.get<UniverseStation>(`/universe/stations/${id}`);
   }
 
-/**
+  /**
    * 根据指定类型获取结构 ID 列表。
    *
    * @param {（“市场” |“manufacturing basic”）} type - 要为其获取 ID 的结构类型。
@@ -152,7 +153,7 @@ export class UniverseApi {
     });
   }
 
-/**
+  /**
    * 获取给定结构 ID 的结构详细信息。
    *
    * @param {number} id - 要获取其详细信息的结构的 ID。
@@ -163,5 +164,13 @@ export class UniverseApi {
     return this.client.get<number[]>(`/universe/structures/${id}`, {
       token,
     });
+  }
+
+  /**
+   * 获取行星详情
+   * @param id
+   */
+  async planet(id: number) {
+    return this.client.get<UniversePlanet>(`/universe/planets/${id}/`);
   }
 }

@@ -1,1 +1,1 @@
-export * from "./PlantAPi";
+export * from "./PlantApi";

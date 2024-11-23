@@ -9,7 +9,7 @@ import { DogmaApi } from "./dogma";
 import { AuthApi } from "./auth";
 import { ContractApi } from "./contracts";
 import { AssetsApi } from "./assets";
-import { PlantAPi } from "./plants";
+import { PlantApi } from "./plants";
 
 export * from "./alliances/model";
 export * from "./universe/model";
@@ -34,6 +34,6 @@ export const createEsiSdk = (host: string) => {
     auth: new AuthApi(client),
     contracts: new ContractApi(client),
     assets: new AssetsApi(client),
-    plant: new PlantAPi(client),
+    plant: new PlantApi(client),
   };
 };

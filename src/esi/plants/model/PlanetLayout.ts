@@ -1,5 +1,5 @@
 // 行星链接信息
-interface PlanetLink {
+export interface PlanetLink {
   /**
    * 目标针脚 ID
    * 类型: integer ($int64)

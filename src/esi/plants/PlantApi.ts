@@ -2,7 +2,7 @@ import type { PlanetLayout } from "./model/PlanetLayout";
 import type { PlanetInfo } from "./model";
 import type { HttpClient } from "../../client";
 
-export class PlantAPi {
+export class PlantApi {
   private client: HttpClient;
 
   constructor(client: HttpClient) {

@@ -6,3 +6,4 @@ export * from "./UniverseSystem";
 export * from "./UniverseType";
 export * from "./UniverseStation";
 export * from "./UniverseStructure";
+export * from "./UniversePlanet";
